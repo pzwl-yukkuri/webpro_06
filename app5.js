@@ -63,4 +63,46 @@ app.get("/janken", (req, res) => {
   res.render( 'janken', display );
 });
 
+// ラジオボタンで手を選ぶじゃんけん
+app.get("/janken2", (req, res) => {
+  const hand = req.query.hand;
+  if (hand != "グー" && hand != "チョキ" && hand != "パー") {
+    return res.redirect("/public/janken2.html");
+  }
+
+  let win = Number(req.query.win);
+  let total = Number(req.query.total);
+
+  const num = Math.floor(Math.random() * 3 + 1);
+  let cpu = "";
+  if (num == 1) cpu = "グー";
+  else if (num == 2) cpu = "チョキ";
+  else cpu = "パー";
+
+  let judgement = "";
+  if (hand == cpu) {
+    judgement = "あいこ";
+  } else if (
+    (hand == "グー" && cpu == "チョキ") ||
+    (hand == "チョキ" && cpu == "パー") ||
+    (hand == "パー" && cpu == "グー")
+  ) {
+    judgement = "勝ち";
+    win += 1;
+  } else {
+    judgement = "負け";
+  }
+  // あいこも1回の対戦として数える。
+  total += 1;
+
+  const display = {
+    your: hand,
+    cpu: cpu,
+    judgement: judgement,
+    win: win,
+    total: total
+  };
+  res.render("janken2", display);
+});
+
 app.listen(8080, () => console.log("Example app listening on port 8080!"));

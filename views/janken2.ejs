@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>じゃんけん2の結果</title>
+</head>
+<body>
+  <h1>じゃんけん2の結果</h1>
+  <p>あなたの手：<%= your %></p>
+  <p>コンピューターの手：<%= cpu %></p>
+  <p>結果：<strong><%= judgement %></strong></p>
+  <p><%= total %>回中<%= win %>勝</p>
+  <form action="/janken2" method="get">
+    <fieldset>
+      <legend>次に出す手を選んでください</legend>
+      <input type="radio" name="hand" id="gu" value="グー" required>
+      <label for="gu">グー</label>
+      <input type="radio" name="hand" id="choki" value="チョキ" required>
+      <label for="choki">チョキ</label>
+      <input type="radio" name="hand" id="pa" value="パー" required>
+      <label for="pa">パー</label>
+    </fieldset>
+    <input type="hidden" name="win" value="<%= win %>">
+    <input type="hidden" name="total" value="<%= total %>">
+    <button type="submit">もう一度勝負する</button>
+  </form>
+  <p><a href="/public/janken2.html">回数をリセットする</a></p>
+</body>
+</html>
