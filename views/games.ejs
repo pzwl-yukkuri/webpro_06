@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ゲーム一覧</title>
+</head>
+<body>
+  <h1>ゲーム一覧</h1>
+  <table border="1">
+    <tr><th>番号</th><th>ゲーム名</th><th>ジャンル</th></tr>
+    <% for (let row of data) { %>
+      <tr>
+        <td><%= row.id %></td>
+        <td><%= row.name %></td>
+        <td><%= row.genre %></td>
+      </tr>
+    <% } %>
+  </table>
+  <p><a href="/public/games_add.html">ゲームを追加する</a></p>
+  <p><a href="/keiyo">駅一覧を見る</a></p>
+</body>
+</html>

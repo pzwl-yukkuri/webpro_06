@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ゲームを追加する</title>
+</head>
+<body>
+  <h1>ゲームを追加する</h1>
+  <form action="/games_add" method="get">
+    <p>
+      <label for="id">番号（登録済みの番号は使えません）</label>
+      <input type="number" name="id" id="id" min="1" step="1" required>
+    </p>
+    <p>
+      <label for="name">ゲーム名</label>
+      <input type="text" name="name" id="name" required>
+    </p>
+    <p>
+      <label for="genre">ジャンル</label>
+      <input type="text" name="genre" id="genre" required>
+    </p>
+    <button type="submit">登録する</button>
+  </form>
+  <p><a href="/games">ゲーム一覧に戻る</a></p>
+</body>
+</html>

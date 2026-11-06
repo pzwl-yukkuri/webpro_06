@@ -27,6 +27,46 @@ app.get("/keiyo_add", (req, res) => {
   res.render('db1', { data: station });
 });
 
+// ゲームのデータ（練習用の架空のゲーム）
+let games = [
+  { id: 1, name: "ff14", genre: "MMORPG" },
+  { id: 2, name: "ポケモン", genre: "RPG" },
+  { id: 3, name: "原神", genre: "MMORPG" },
+];
+
+app.get("/games", (req, res) => {
+  res.render("games", { data: games });
+});
+
+app.get("/games_add", (req, res) => {
+  let id = Number(req.query.id);
+  let name = req.query.name;
+  let genre = req.query.genre;
+
+  // 必須項目を確認する。
+  if (!Number.isInteger(id) || id < 1 ||
+      typeof name != "string" || typeof genre != "string") {
+    return res.status(400).send("入力内容を確認してください。ブラウザーの戻るボタンで戻れます。");
+  }
+  name = name.trim();
+  genre = genre.trim();
+  if (name == "" || genre == "") {
+    return res.status(400).send("ゲーム名とジャンルを入力してください。ブラウザーの戻るボタンで戻れます。");
+  }
+
+  // 同じ番号のデータを重ねて登録しない。
+  for (let row of games) {
+    if (row.id == id) {
+      return res.status(400).send("その番号は登録済みです。別の番号を入力してください。ブラウザーの戻るボタンで戻れます。");
+    }
+  }
+
+  let newdata = { id: id, name: name, genre: genre };
+  games.push(newdata);
+  // 登録後は一覧に移動する。一覧を再読み込みしても追加処理を繰り返さない。
+  res.redirect("/games");
+});
+
 app.get("/hello1", (req, res) => {
   const message1 = "Hello world";
   const message2 = "Bon jour";
