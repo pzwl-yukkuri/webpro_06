@@ -76,7 +76,16 @@ app.get("/keiyo2", (req, res) => {
   res.render("keiyo2", { data: station2 });
 });
 
+app.get("/keiyo2/:number", (req, res) => {
+  const number = req.params.number;
+  const detail = station2[number];
 
+  if (!detail) {
+    return res.status(404).send("指定した駅はありません。");
+  }
+
+  res.render("keiyo2_detail", { data: detail });
+});
 
 app.get("/keiyo", (req, res) => {
   // 本来ならここにDBとのやり取りが入る
