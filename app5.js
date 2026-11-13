@@ -72,6 +72,12 @@ let station2 = [
   }
 ];
 
+app.get("/keiyo2", (req, res) => {
+  res.render("keiyo2", { data: station2 });
+});
+
+
+
 app.get("/keiyo", (req, res) => {
   // 本来ならここにDBとのやり取りが入る
   res.render('db1', { data: station });
